@@ -1,0 +1,17 @@
+<mat-card class="main-form">
+  <mat-card-title>Repository List</mat-card-title>
+  <mat-card-content *ngIf="repositories$ | async as repositoryState">
+    <mat-list class="">
+      <mat-list-item *ngFor="let repository of repositoryState.repositories" lines="3">
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <div>
+          <div matListItemTitle><a mat-button routerLink="repository" (click)="getRepository(repository.name)">{{repository.name}}</a> </div>
+          <div>{{repository.description}}</div>
+        </div>
+        <div class="star">
+          <mat-icon matListItemIcon>star</mat-icon> : {{repository.stargazers_count}}
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

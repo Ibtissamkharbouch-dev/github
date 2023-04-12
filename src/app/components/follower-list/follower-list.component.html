@@ -1,0 +1,11 @@
+<mat-card class="main-form">
+  <mat-card-title>Follower List</mat-card-title>
+  <mat-card-content *ngIf="followers$ | async as userState">
+    <mat-list>
+      <mat-list-item *ngFor="let follower of userState.followers">
+        <img matListItemAvatar [src]="follower.avatar_url" alt="follower avatar" >
+        <h3 matListItemTitle>{{follower.login}}</h3>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

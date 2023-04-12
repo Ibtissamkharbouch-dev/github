@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div>
+      <span routerLink="">Github</span>
+      <button mat-button routerLink="user-profile">Profile</button>
+      <button mat-button routerLink="followers" (click)="getUserFollowers()">Followers</button>
+      <button mat-button routerLink="repositories" (click)="getUserRepositories()">repositories</button>
+    </div>
+    <div class="search">
+      <input matInput placeholder="Search  user">
+      <button mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-button (click)="logoutUser()">Logout</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

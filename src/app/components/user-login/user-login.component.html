@@ -1,0 +1,18 @@
+<mat-card class="main-form">
+  <mat-card-title>User Login</mat-card-title>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name...</mat-label>
+    <input type="text" matInput placeholder="Enter your name..." [formControl]="name">
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
+
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="loginUser()" [disabled]="name.invalid">
+      <span class="form-row">
+        <!-- <mat-spinner diameter="25"></mat-spinner> -->
+        Login
+      </span>
+    </button>
+  </mat-card-actions>
+</mat-card>

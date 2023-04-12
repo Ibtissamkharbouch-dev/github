@@ -1,0 +1,12 @@
+mat-toolbar-row{
+  display: flex;
+  justify-content: space-between;
+}
+.mat-toolbar .mat-input-element {
+  padding: 4px;
+}
+
+input:focus-visible {
+  outline: 0px;
+}
+

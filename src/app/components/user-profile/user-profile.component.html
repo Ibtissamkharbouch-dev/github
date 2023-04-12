@@ -1,0 +1,16 @@
+<div *ngIf="user$ | async as userState" >
+  <mat-card class="user-card"  *ngIf="userState.dataState == UsersStateEnum.SUCCESS">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{userState.connectedUser?.name}}</mat-card-title>
+        <mat-card-subtitle>{{userState.connectedUser?.location}}</mat-card-subtitle>
+        <img mat-card-lg-image [src]="userState.connectedUser?.avatar_url" alt="avatar_url">
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      {{userState.connectedUser?.bio}}
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
