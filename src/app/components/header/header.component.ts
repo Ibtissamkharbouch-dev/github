@@ -3,9 +3,11 @@ import { Store } from '@ngrx/store';
 import * as UserActions from '../../state/actions/user.actions';
 import * as RepositoryActions from '../../state/actions/repository.actions';
 import { GithubApiService } from 'src/app/services/github-api.service';
-import { Observable, tap } from 'rxjs';
-import { UserState } from 'src/app/state/reducers/user.reducer';
+import { Observable } from 'rxjs';
+import { UserState, UsersStateEnum } from 'src/app/state/reducers/user.reducer';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -15,30 +17,36 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  login:string|null;
+  name = new FormControl(null, [Validators.required]);
 
-  constructor( private store: Store, private githubService: GithubApiService, private router : Router) {
+  login:string|null;
+  login$= this.githubService.isLoggedIn$;
+
+  user$: Observable<UserState> = this.store.select(state => state.userState);
+  readonly UsersStateEnum = UsersStateEnum;
+
+
+  constructor( private store: Store<{ userState: UserState }>, private githubService: GithubApiService, private router : Router) {
     this.login = this.githubService.login;
-    console.log('login-user');
-    console.log(this.githubService.login);
+    console.log(this.login);
+
    }
 
   ngOnInit(): void {
   }
 
-  getUserFollowers() {
-    if(this.login)
-    this.store.dispatch(UserActions.loadFollowers({login: this.login}));
-  }
-
-  getUserRepositories() {
-    if(this.login)
-    this.store.dispatch(RepositoryActions.loadRepositories({login: this.login}));
+  loadUser() {
+    console.log(this.name);
+    if(!this.name.value) return;
+    this.store.dispatch(UserActions.loadUser({login:this.name.value}));
+    this.store.dispatch(RepositoryActions.loadRepositories({login: this.name.value}));
+    this.name.reset();
   }
 
   logoutUser() {
     this.store.dispatch(UserActions.logoutUser());
     localStorage.removeItem('login');
+    this.githubService.logout();
     this.router.navigate(['login'])
   }
 

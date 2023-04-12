@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { GithubApiService } from 'src/app/services/github-api.service';
 import { UserState } from 'src/app/state/reducers/user.reducer';
+import * as UserActions from 'src/app/state/actions/user.actions';
+
 
 export interface Section {
   name: string;
@@ -17,34 +20,16 @@ export interface Section {
 export class FollowerListComponent implements OnInit {
   followers$:Observable<UserState> = this.store.select(state => state.userState);
 
-  constructor(private store: Store<{userState: UserState}>) { }
+  login:string|null;
+
+  constructor(private store: Store<{userState: UserState}>, private githubService: GithubApiService) {
+    this.login = this.githubService.login;
+   }
 
   ngOnInit(): void {
+    if(this.login)
+    this.store.dispatch(UserActions.loadFollowers({login: this.login}));
   }
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    },
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-  ];
 
 }

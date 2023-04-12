@@ -49,10 +49,10 @@ export class GithubApiService {
   }
 
   loginUser(){
-    // this._isLoggedIn$.next(true);
+    this._isLoggedIn$.next(true);
   }
-  logoutUser(){
-    // this._isLoggedIn$.next(false);
+  logout(){
+    this._isLoggedIn$.next(false);
   }
 
 }

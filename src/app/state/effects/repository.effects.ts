@@ -11,7 +11,6 @@ import { Repository } from 'src/app/models/repository.model';
 @Injectable()
 export class RepositoryEffects {
 
-
   constructor(private actions$: Actions,
               private githubApiService: GithubApiService) {}
 

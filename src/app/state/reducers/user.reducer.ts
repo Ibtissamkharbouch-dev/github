@@ -31,12 +31,15 @@ export const userReducer = createReducer(
   on(UserActions.loginUser, state => ({ ...state, dataState: UsersStateEnum.LOADING})),
   on(UserActions.loginUserSuccess, (state, { data }) => ({ ...state, dataState: UsersStateEnum.SUCCESS, connectedUser: data})),
   on(UserActions.loginUserFailure, (state, { error }) => ({...state, dataState: UsersStateEnum.ERROR,  errorMessage: error})),
+
   on(UserActions.loadFollowers, state => ({ ...state, dataState: UsersStateEnum.LOADING})),
   on(UserActions.loadFollowersSuccess, (state, { data }) => ({ ...state, dataState: UsersStateEnum.SUCCESS, followers: data})),
   on(UserActions.loadFollowersFailure, (state, { error }) => ({...state, dataState: UsersStateEnum.ERROR,  errorMessage: error})),
+
   on(UserActions.loadUser, state => ({ ...state, dataState: UsersStateEnum.LOADING})),
   on(UserActions.loadUserSuccess, (state, { data }) => ({ ...state, dataState: UsersStateEnum.SUCCESS, user: data})),
   on(UserActions.loadUserFailure, (state, { error }) => ({...state, dataState: UsersStateEnum.ERROR,  errorMessage: error})),
-  on(UserActions.logoutUser, state => ({ ...state}))
+
+  on(UserActions.logoutUser, state => ({ ...state, connectedUser:null}))
 );
 

@@ -4,7 +4,7 @@ import { Repository } from 'src/app/models/repository.model';
 
 export const repositoryFeatureKey = 'repository';
 
-export enum RepositorysStateEnum {
+export enum RepositoriesStateEnum {
   LOADING ='Loading',
   SUCCESS ='Success',
   ERROR ='Error',
@@ -13,7 +13,7 @@ export enum RepositorysStateEnum {
 export interface RepositoryState {
   repositories: Repository[];
   repository: Repository | null;
-  dataState: RepositorysStateEnum | null;
+  dataState: RepositoriesStateEnum | null;
   errorMessage: string | null;
 }
 
@@ -26,12 +26,12 @@ export const initialState: RepositoryState = {
 
 export const repositoryReducer = createReducer(
   initialState,
-  on(RepositoryActions.loadRepositories, state => ({ ...state, dataState: RepositorysStateEnum.LOADING})),
-  on(RepositoryActions.loadRepositoriesSuccess, (state, { data }) => ({ ...state, dataState: RepositorysStateEnum.SUCCESS, repositories: data})),
-  on(RepositoryActions.loadRepositoriesFailure, (state, { error }) => ({...state, dataState: RepositorysStateEnum.ERROR,  errorMessage: error})),
+  on(RepositoryActions.loadRepositories, state => ({ ...state, dataState: RepositoriesStateEnum.LOADING})),
+  on(RepositoryActions.loadRepositoriesSuccess, (state, { data }) => ({ ...state, dataState: RepositoriesStateEnum.SUCCESS, repositories: data})),
+  on(RepositoryActions.loadRepositoriesFailure, (state, { error }) => ({...state, dataState: RepositoriesStateEnum.ERROR,  errorMessage: error})),
 
-  on(RepositoryActions.loadRepository, state => ({ ...state, dataState: RepositorysStateEnum.LOADING})),
-  on(RepositoryActions.loadRepositorySuccess, (state, { data }) => ({ ...state, dataState: RepositorysStateEnum.SUCCESS, repository: data})),
-  on(RepositoryActions.loadRepositoryFailure, (state, { error }) => ({...state, dataState: RepositorysStateEnum.ERROR,  errorMessage: error})),
+  on(RepositoryActions.loadRepository, state => ({ ...state, dataState: RepositoriesStateEnum.LOADING})),
+  on(RepositoryActions.loadRepositorySuccess, (state, { data }) => ({ ...state, dataState: RepositoriesStateEnum.SUCCESS, repository: data})),
+  on(RepositoryActions.loadRepositoryFailure, (state, { error }) => ({...state, dataState: RepositoriesStateEnum.ERROR,  errorMessage: error})),
 );
 

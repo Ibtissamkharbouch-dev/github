@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { GithubApiService } from 'src/app/services/github-api.service';
 import { UserActionsTypes } from '../actions/user.actions';
-import { exhaustMap, map, catchError, of, tap } from 'rxjs';
+import { exhaustMap, map, catchError, of } from 'rxjs';
 import * as UserActions from '../actions/user.actions';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
@@ -47,13 +47,10 @@ export class UserEffects {
       return this.githubApiService.getUserProfile(action.login)
       .pipe(
         map((user:User) => {
-          // this.router.naoigate(['/user-profile']);
+          this.router.navigate(['/user']);
           return UserActions.loadUserSuccess({data:user})}),
         catchError((error) => of(UserActions.loadUser(error)))
       )})
     )
   );
-
-
-
 }

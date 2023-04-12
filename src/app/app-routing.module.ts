@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   {path: 'repositories', component: RepositoryListComponent, canActivate: [AuthGuard]},
   {path: 'repository', component: RepositoryStatisticsComponent, canActivate: [AuthGuard]},
-  {path: '**', redirectTo:''}
+  {path: '**', redirectTo:'/'}
 
 ];
 

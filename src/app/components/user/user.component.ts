@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserState, UsersStateEnum } from 'src/app/state/reducers/user.reducer';
+import { RepositoryState, RepositoriesStateEnum } from 'src/app/state/reducers/repository.reducer';
+
 
 @Component({
   selector: 'app-user',
@@ -11,11 +13,15 @@ import { UserState, UsersStateEnum } from 'src/app/state/reducers/user.reducer';
 export class UserComponent implements OnInit {
 
   user$: Observable<UserState> = this.store.select(state => state.userState);
-  readonly UsersStateEnum = UsersStateEnum;
+  repositories$:Observable<RepositoryState> = this.store.select(state => state.repositoryState);
 
-  constructor(private store: Store<{ userState: UserState }>) { }
+  readonly UsersStateEnum = UsersStateEnum;
+  readonly RepositoriesStateEnum = RepositoriesStateEnum;
+
+  constructor(private store: Store<{ userState: UserState, repositoryState: RepositoryState }>) { }
 
   ngOnInit(): void {
   }
+
 
 }

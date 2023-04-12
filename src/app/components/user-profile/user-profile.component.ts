@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { GithubApiService } from 'src/app/services/github-api.service';
+import * as UserActions from 'src/app/state/actions/user.actions';
 import { UserState, UsersStateEnum } from 'src/app/state/reducers/user.reducer';
 
 
@@ -11,23 +13,18 @@ import { UserState, UsersStateEnum } from 'src/app/state/reducers/user.reducer';
 })
 export class UserProfileComponent implements OnInit {
 
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
-
   user$: Observable<UserState> = this.store.select(state => state.userState);
   readonly UsersStateEnum = UsersStateEnum;
 
-  constructor(private store: Store<{ userState: UserState }>) { }
+  login:string|null;
+
+  constructor(private store: Store<{ userState: UserState }>, private githubService: GithubApiService) {
+    this.login = this.githubService.login;
+  }
 
   ngOnInit(): void {
-
-    console.log('user');
-
-    // this.user$.pipe(
-    //   map( (data: any) => {console.log(data);
-    //   })
-    // ).subscribe();
+    if(this.login)
+    this.store.dispatch(UserActions.loginUser({login:this.login}));
   }
 
 }

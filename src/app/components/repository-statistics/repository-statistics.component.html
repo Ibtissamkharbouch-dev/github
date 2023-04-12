@@ -1,1 +1,26 @@
-<p>repository-statistics works!</p>
+<div *ngIf="repository$ | async as repositoryState">
+  <mat-card class="example-card" *ngIf="repositoryState.dataState ==  RepositoriesStateEnum.SUCCESS && repositoryState.repository">
+    <mat-card-header>
+      <mat-card-title>{{repositoryState.repository.name}} <span>{{repositoryState.repository.visibility}}</span></mat-card-title>
+      <mat-card-subtitle>Created at : {{repositoryState.repository.created_at | date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{repositoryState.repository.description}}</p>
+      <p><mat-icon matListItemIcon>star</mat-icon> : {{repositoryState.repository.stargazers_count}} stars</p>
+      <p><mat-icon matListItemIcon>filter_list</mat-icon> : {{repositoryState.repository.forks_count}} Forks</p>
+      <p><mat-icon matListItemIcon>visibility</mat-icon> : {{repositoryState.repository.watchers_count}} watchers</p>
+      <mat-divider></mat-divider>
+      <h3>Language</h3>
+      <p><mat-icon matListItemIcon>circle</mat-icon> {{repositoryState.repository.language}}</p>
+      <mat-divider></mat-divider>
+      <h3>Other Informations</h3>
+      <p>last Update : {{repositoryState.repository.updated_at | date}}</p>
+      <p>last pushes : {{repositoryState.repository.pushed_at | date}}</p>
+      <p>size : {{repositoryState.repository.size}}</p>
+      <p>default_branch: {{repositoryState.repository.default_branch}}</p>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+

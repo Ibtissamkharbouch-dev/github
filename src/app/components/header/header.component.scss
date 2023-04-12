@@ -1,7 +1,8 @@
-mat-toolbar-row{
+mat-toolbar-row, .navbar{
   display: flex;
   justify-content: space-between;
 }
+
 .mat-toolbar .mat-input-element {
   padding: 4px;
 }

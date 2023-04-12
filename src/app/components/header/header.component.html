@@ -1,18 +1,20 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="user$ | async as userState">
   <mat-toolbar-row>
-    <div>
+    <div class="navbar">
       <span routerLink="">Github</span>
-      <button mat-button routerLink="user-profile">Profile</button>
-      <button mat-button routerLink="followers" (click)="getUserFollowers()">Followers</button>
-      <button mat-button routerLink="repositories" (click)="getUserRepositories()">repositories</button>
+      <div *ngIf="login$ | async">
+        <button mat-button routerLink="user-profile">Profile</button>
+        <button mat-button routerLink="followers">Followers</button>
+        <button mat-button routerLink="repositories">repositories</button>
+      </div>
     </div>
-    <div class="search">
-      <input matInput placeholder="Search  user">
-      <button mat-icon-button>
+    <div class="search" *ngIf="login$ | async">
+      <input matInput type="text" placeholder="Search user...*" [formControl]="name">
+      <button mat-icon-button (click)="loadUser()" [disabled]="name.invalid">
         <mat-icon>search</mat-icon>
       </button>
     </div>
-    <div>
+    <div *ngIf="login$ | async">
       <button mat-button (click)="logoutUser()">Logout</button>
     </div>
   </mat-toolbar-row>

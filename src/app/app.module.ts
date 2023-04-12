@@ -12,7 +12,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { RepositoryEffects } from './state/effects/repository.effects';
-import { RepositoryStatisticsEffects } from './state/effects/repository-statistics.effects';
 import { UserEffects } from './state/effects/user.effects';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { userReducer } from './state/reducers/user.reducer';
 import { repositoryReducer } from './state/reducers/repository.reducer';
 import { UserComponent } from './components/user/user.component';
-import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +45,7 @@ import { AuthGuard } from './services/auth.guard';
     MaterialModule,
     StoreModule.forRoot({userState: userReducer, repositoryState: repositoryReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([RepositoryEffects, RepositoryStatisticsEffects, UserEffects])
+    EffectsModule.forRoot([RepositoryEffects, UserEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
